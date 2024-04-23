@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<robot name="combined_robot">
+
+  <!-- Include the URDF for Pioneer 3DX -->
+  <include filename="/home/ashutoshsahu/catkin_moma/src/robo-rescue/p3dx_urdf_model/defs/p3dx.urdf"/>
+
+</robot>

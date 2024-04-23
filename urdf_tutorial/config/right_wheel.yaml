@@ -1,0 +1,2 @@
+type: "position_controller/JointPositionController"
+joint: right_hub_joint

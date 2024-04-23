@@ -1,0 +1,39 @@
+<launch>
+    <!-- these are the arguments you can pass this launch file, for example paused:=true -->
+    <arg name="world_name" default="worlds/empty.world"/>
+    <arg name="robot_namespace" default="hello"/>
+
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(arg world_name)"/> <!-- world_name is wrt GAZEBO_RESOURCE_PATH environment variable -->
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+    <arg name="verbose" value="true"/>
+    </include>
+      <arg name="x" default="0.0"/>
+  <arg name="y" default="0.0"/>
+  <arg name="z" default="0.0"/>
+  <arg name="yaw" default="0.0"/>
+
+ <group ns="$(arg robot_namespace)">
+  <param name="robot_description" textfile="$(find urdf_tutorial)/urdf/onlybase.urdf" />
+
+
+  <!-- push robot_description to factory and spawn robot in gazebo -->
+    <node name="spawn_p3dx_model" pkg="gazebo_ros" type="spawn_model"
+        args="-x $(arg x)
+              -y $(arg y)
+              -z $(arg z)
+              -Y $(arg yaw)
+              -unpause
+              -urdf
+              -param robot_description
+              -model $(arg robot_namespace)" />
+  <node pkg="robot_state_publisher" type="robot_state_publisher"  name="robot_state_publisher">
+    <param name="publish_frequency" type="double" value="30.0" />
+  </node>
+</group>
+  
+</launch>
